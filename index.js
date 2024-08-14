@@ -4,7 +4,9 @@ const app = express();
 
 // define routes
 app.get("/", (req, res) => {
-  res.status(200).send("Hello from the server side!");
+  res
+    .status(200)
+    .json({ message: "Hello from the server side!", app: "Natours" });
 });
 
 const port = 3000;
