@@ -31,6 +31,24 @@ app.get("/api/v1/tours", (req, res) => {
   });
 });
 
+// handle get request of a single data item
+app.get("/api/v1/tours/:id", (req, res) => {
+  const id = req.params.id * 1;
+  const tour = tours.find((element) => element.id === id);
+
+  if (!tour) {
+    return res.status(404).json({
+      status: "fail",
+      message: "Invalid ID",
+    });
+  }
+
+  res.status(200).json({
+    status: "success",
+    data: tour,
+  });
+});
+
 // handle post request
 app.post("/api/v1/tours", (req, res) => {
   const newId = tours[tours.length - 1].id + 1;
