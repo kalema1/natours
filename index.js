@@ -1,10 +1,20 @@
 const fs = require("fs");
 const express = require("express");
+const morgan = require("morgan");
 
 const app = express();
 
+// 3rd party  middleware
+app.use(morgan("dev"));
+
 //middle to be use on request data
 app.use(express.json());
+
+//creating a middelware function
+app.use((req, res, next) => {
+  console.log("Hello from the Middleware");
+  next();
+});
 
 // define routes
 /* app.get("/", (req, res) => {
