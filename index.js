@@ -109,20 +109,19 @@ const deleteTour = (req, res) => {
   });
 };
 
-/* // define api routes
-app.get("/api/v1/tours", getAllTours);
+const getAllUsers = (req, res) => {
+  res.status(500).json({
+    stsatus: "error",
+    message: "This is not yet defined",
+  });
+};
 
-// handle get request of a single data item
-app.get("/api/v1/tours/:id", getTour);
-
-// handle post request
-app.post("/api/v1/tours", createTour);
-
-// handling a patch request
-app.patch("/api/v1/tours/:id", updateTour);
-
-// handle delete requests
-app.delete("/api/v1/tours/:id", deleteTour); */
+const createUser = (req, res) => {
+  res.status(500).json({
+    stsatus: "error",
+    message: "This is not yet defined",
+  });
+};
 
 app.route("/api/v1/tours").get(getAllTours).post(createTour);
 
@@ -131,6 +130,9 @@ app
   .get(getTour)
   .patch(updateTour)
   .delete(deleteTour);
+
+// users routes
+app.route("/api/v1/users/").get(getAllUsers).post(createUser);
 
 const port = 3000;
 
