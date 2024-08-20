@@ -31,6 +31,24 @@ async function connectDB() {
   }
 }
 
+// create the tour schema
+const tourSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: [true, "A Tour mush have a name"],
+  },
+  rating: {
+    type: Number,
+  },
+  price: {
+    type: Number,
+    required: [true, "A Tour mush have a price"],
+  },
+});
+
+//create the tour  model
+const Tour = mongoose.model("Tour", tourSchema);
+
 const port = 3000;
 
 // start up a server
