@@ -39,6 +39,7 @@ const tourSchema = new mongoose.Schema({
   },
   rating: {
     type: Number,
+    default: 4.5,
   },
   price: {
     type: Number,
@@ -48,6 +49,21 @@ const tourSchema = new mongoose.Schema({
 
 //create the tour  model
 const Tour = mongoose.model("Tour", tourSchema);
+
+//create document
+const testTour = new Tour({
+  name: "The park camper",
+  rating: 4.4,
+  price: 99,
+});
+
+connectDB();
+
+//save document to the database
+testTour
+  .save()
+  .then((doc) => console.log(doc))
+  .catch((err) => console.log("ERROR🔥:", err));
 
 const port = 3000;
 
