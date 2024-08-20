@@ -31,40 +31,6 @@ async function connectDB() {
   }
 }
 
-// create the tour schema
-const tourSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: [true, "A Tour mush have a name"],
-  },
-  rating: {
-    type: Number,
-    default: 4.5,
-  },
-  price: {
-    type: Number,
-    required: [true, "A Tour mush have a price"],
-  },
-});
-
-//create the tour  model
-const Tour = mongoose.model("Tour", tourSchema);
-
-//create document
-const testTour = new Tour({
-  name: "The park camper",
-  rating: 4.4,
-  price: 99,
-});
-
-connectDB();
-
-//save document to the database
-testTour
-  .save()
-  .then((doc) => console.log(doc))
-  .catch((err) => console.log("ERROR🔥:", err));
-
 const port = 3000;
 
 // start up a server
