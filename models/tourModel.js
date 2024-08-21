@@ -5,6 +5,7 @@ const tourSchema = new Schema({
   name: {
     type: String,
     required: [true, "A Tour mush have a name"],
+    unique: true,
   },
   rating: {
     type: Number,

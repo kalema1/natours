@@ -31,6 +31,8 @@ async function connectDB() {
   }
 }
 
+connectDB();
+
 const port = 3000;
 
 // start up a server
