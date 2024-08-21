@@ -28,6 +28,21 @@ exports.getAllTours = async (req, res) => {
       query = query.sort("-timestamps");
     }
 
+    // 3) Pagination
+    const page = req.query.page * 1 || 1;
+    const limit = req.query.limit * 1 || 100;
+    const skip = (page - 1) * limit;
+
+    query = query.skip(skip).limit(limit);
+
+    if (req.query.page) {
+      const numberOfTours = await Tour.countDocuments();
+
+      if (skip >= numberOfTours) {
+        throw new Error("page does not exist");
+      }
+    }
+
     // EXECUTE THE QUERY
     const tours = await query;
 
