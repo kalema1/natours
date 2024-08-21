@@ -1,11 +1,6 @@
 const fs = require("fs");
 const Tour = require("../models/tourModel");
 
-//read the data from json file before being sent by the api route
-const tours = JSON.parse(
-  fs.readFileSync(`${__dirname}/../data/tours-simple.json`)
-);
-
 exports.getAllTours = async (req, res) => {
   try {
     const tours = await Tour.find();
