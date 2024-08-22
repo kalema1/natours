@@ -56,8 +56,13 @@ const tourSchema = new Schema(
       type: [Date],
     },
   },
-  { timestamps: true }
+  { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
+
+// create the virtual property
+tourSchema.virtual("durationWeeks").get(function () {
+  return this.duration / 7;
+});
 
 //create the tour  model
 const Tour = model("Tour", tourSchema);
