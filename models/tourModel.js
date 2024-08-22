@@ -1,4 +1,5 @@
 const { Schema, model } = require("mongoose");
+const slugify = require("slugify");
 
 // create the tour schema
 const tourSchema = new Schema(
@@ -9,6 +10,7 @@ const tourSchema = new Schema(
       unique: true,
       trim: true,
     },
+    slug: { type: String },
     duration: {
       type: Number,
       required: [true, "A Tour mush have a duration"],
@@ -62,6 +64,12 @@ const tourSchema = new Schema(
 // create the virtual property
 tourSchema.virtual("durationWeeks").get(function () {
   return this.duration / 7;
+});
+
+// mongoose document middleware called b4 the document is saved or created
+tourSchema.pre("save", function (next) {
+  this.slug = slugify(this.name, { lower: true });
+  next();
 });
 
 //create the tour  model
