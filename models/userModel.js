@@ -25,6 +25,13 @@ const userSchema = new Schema(
     passwordConfirm: {
       type: String,
       required: [true, " please confirm your password"],
+      validate: {
+        // works only on SAVE nad CREATE
+        validator: function (curElement) {
+          return curElement === this.password;
+        },
+        message: "passwords are not the same",
+      },
     },
     photo: { type: String },
   },
