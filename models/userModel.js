@@ -52,6 +52,14 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
+// instant methods
+userSchema.methods.correctPassword = async function (
+  candidatePassword,
+  userPassword
+) {
+  return await bcrypt.compare(candidatePassword, userPassword);
+};
+
 // create the user model
 const User = model("User", userSchema);
 
