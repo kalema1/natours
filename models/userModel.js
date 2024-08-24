@@ -1,5 +1,6 @@
 const { Schema, model } = require("mongoose");
 const validator = require("validator");
+const bcrypt = require("bcryptjs");
 
 //create user schema
 const userSchema = new Schema(
@@ -37,6 +38,18 @@ const userSchema = new Schema(
   },
   { timestamps: true }
 );
+
+// encrypt password... we use mongoose middleware
+userSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) {
+    return next();
+  }
+  // encrypt the password wit cost of 12
+  this.password = await bcrypt.hash(this.password, 12);
+
+  this.passwordConfirm = undefined;
+  next();
+});
 
 // create the user model
 const User = model("User", userSchema);
