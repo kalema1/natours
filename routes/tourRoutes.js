@@ -7,6 +7,7 @@ const {
   deleteTour,
   getTourStats,
 } = require("../controllers/tourController");
+const { protect } = require("../controllers/authController");
 
 const router = express.Router();
 
@@ -15,7 +16,7 @@ const router = express.Router();
 
 router.route("/tour-stats").get(getTourStats);
 
-router.route("/").get(getAllTours).post(createTour);
+router.route("/").get(protect, getAllTours).post(createTour);
 
 router.route("/:id").get(getTour).patch(updateTour).delete(deleteTour);
 

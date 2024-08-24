@@ -36,6 +36,7 @@ const userSchema = new Schema(
       },
     },
     photo: { type: String },
+    passwordChangedAt: { type: Date },
   },
   { timestamps: true }
 );
@@ -58,6 +59,15 @@ userSchema.methods.correctPassword = async function (
   userPassword
 ) {
   return await bcrypt.compare(candidatePassword, userPassword);
+};
+
+userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
+  if (this.passwordChangedAt) {
+    const changedTimestamp = parseInt(this.passwordChangedAt.getTime() / 1000);
+
+    return JWTTimestamp < changedTimestamp;
+  }
+  return false;
 };
 
 // create the user model
