@@ -21,3 +21,21 @@ exports.signup = catchAsync(async (req, res, next) => {
     data: { user: newUser },
   });
 });
+
+exports.login = (req, res, next) => {
+  const { email, password } = req.body;
+
+  // check if email and password exist
+  if (!email || !password) {
+    throw new Error("Please provide email and password");
+  }
+
+  // check if email and password are correct
+
+  //send token to client
+  const token = "";
+  res.status(200).json({
+    status: "success",
+    token,
+  });
+};

@@ -22,6 +22,7 @@ const userSchema = new Schema(
       type: String,
       required: [true, "Please prvide a password"],
       minLength: 8,
+      select: false,
     },
     passwordConfirm: {
       type: String,
