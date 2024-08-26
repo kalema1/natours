@@ -37,6 +37,11 @@ const userSchema = new Schema(
     },
     photo: { type: String },
     passwordChangedAt: { type: Date },
+    role: {
+      type: String,
+      enum: ["user", "guide", "lead-guide", "admin"],
+      default: "user",
+    },
   },
   { timestamps: true }
 );
